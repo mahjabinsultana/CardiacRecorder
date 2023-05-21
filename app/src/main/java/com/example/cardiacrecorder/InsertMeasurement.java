@@ -3,17 +3,20 @@ package com.example.cardiacrecorder;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import java.util.Calendar;
 
 public class InsertMeasurement extends AppCompatActivity {
 
+    TimePickerDialog timePickerDialog;
     TextView dateView;
     TextView timeView;
 
@@ -45,5 +48,32 @@ public class InsertMeasurement extends AppCompatActivity {
                 dateView.setText(date);
             }
         };
+
+        timeView = findViewById(R.id.timeId);
+        timeView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //open_TimePickerDialog();
+                int hourOfDay = 12;
+                int minute = 12;
+                boolean is24HourView = true;
+
+                timePickerDialog = new TimePickerDialog(InsertMeasurement.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+                        timeView.setText(hourOfDay+" : "+ minute);
+                    }
+                },hourOfDay,minute,is24HourView);
+                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                timePickerDialog.show();
+            }
+        });
+
+
+
+
+
     }
+
+
 }
