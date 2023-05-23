@@ -1,56 +1,38 @@
 package com.example.cardiacrecorder;
 
-import android.content.Context;
+import android.app.Activity;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
+
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
-import java.util.Date;
 
-public class CustomAdapter extends BaseAdapter {
+import java.util.List;
 
-    Context c;
-    ArrayList<Date> date;
-    ArrayList<Date> time;
-    ArrayList<Integer> systolic;
-    ArrayList<Integer> diastolic;
-    ArrayList<Integer> heartrate;
-    ArrayList<String> comment;
+public class CustomAdapter extends ArrayAdapter {
 
-    public CustomAdapter(Context c, ArrayList<Date> date, ArrayList<Date> time, ArrayList<Integer> systolic, ArrayList<Integer> diastolic, ArrayList<Integer> heartrate, ArrayList<String> comment) {
+    private Activity c;
+    List<SingleMeasurement> sm;
+
+
+    public CustomAdapter(Activity c, List<SingleMeasurement> sm) {
+        super(c, R.layout.list_view,sm);
         this.c = c;
-        this.date = date;
-        this.time = time;
-        this.systolic = systolic;
-        this.diastolic = diastolic;
-        this.heartrate = heartrate;
-        this.comment = comment;
+        this.sm = sm;
     }
 
+    @NonNull
     @Override
-    public int getCount() {
-        return comment.size();
-    }
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-    @Override
-    public Object getItem(int i) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int i) {
-        return 0;
-    }
-
-    @Override
-    public View getView(int i, View view, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view = inflater.inflate(R.layout.list_view, parent , false);
+        LayoutInflater inflater = c.getLayoutInflater();
+        View view = inflater.inflate(R.layout.list_view, null , true);
 
         TextView dat, tim, sys, dia, hr, com;
 
@@ -61,12 +43,14 @@ public class CustomAdapter extends BaseAdapter {
         hr = view.findViewById(R.id.heartrate);
         com = view.findViewById(R.id.comment);
 
-        dat.setText(String.valueOf(date.get(i)));
-        tim.setText(String.valueOf(time.get(i)));
-        sys.setText(String.valueOf(systolic.get(i)));
-        dia.setText(String.valueOf(diastolic.get(i)));
-        hr.setText(String.valueOf(heartrate.get(i)));
-        com.setText(String.valueOf(comment.get(i)));
+        SingleMeasurement singleMeasurement = sm.get(position);
+
+        dat.setText(singleMeasurement.getDate());
+        tim.setText(singleMeasurement.getTime());
+        sys.setText(singleMeasurement.getSystolicPressure());
+        dia.setText(singleMeasurement.getDiastolicPressure());
+        hr.setText(singleMeasurement.getHeartRate());
+        com.setText(singleMeasurement.getComment());
 
 
         return view;
