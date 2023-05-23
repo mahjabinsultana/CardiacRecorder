@@ -8,9 +8,15 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 
@@ -20,12 +26,17 @@ public class InsertMeasurement extends AppCompatActivity {
     TextView dateView;
     TextView timeView;
 
+    EditText systolicPressureText,diastolicPressureText,heartRateText,commentText;
+    Button insertButton;
+
+    DatabaseReference databaseReference;
+
     DatePickerDialog.OnDateSetListener setListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insert_measurement3);
-
+        // This portion gets the date
         dateView = findViewById(R.id.dateId);
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
@@ -49,6 +60,7 @@ public class InsertMeasurement extends AppCompatActivity {
             }
         };
 
+        // This portion gets the time
         timeView = findViewById(R.id.timeId);
         timeView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,8 +82,41 @@ public class InsertMeasurement extends AppCompatActivity {
         });
 
 
+        // This portion sends data to firebase
 
+        databaseReference = FirebaseDatabase.getInstance().getReference("Records");
+        dateView = findViewById(R.id.dateId);
+        timeView = findViewById(R.id.timeId);
+        systolicPressureText = findViewById(R.id.systolicPressureId);
+        diastolicPressureText = findViewById(R.id.diastolicPressureId);
+        heartRateText = findViewById(R.id.heartRateId);
+        commentText = findViewById(R.id.commentId);
+        insertButton = findViewById(R.id.insertButtonId);
 
+        insertButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                insertData();
+            }
+        });
+
+    }
+
+    public void insertData()
+    {
+        String date = dateView.getText().toString().trim();
+        String time = timeView.getText().toString().trim();
+        String systolicPressure = systolicPressureText.getText().toString().trim();
+        String diastolicPressure = diastolicPressureText.getText().toString().trim();
+        String heartRate = heartRateText.getText().toString().trim();
+        String comment = commentText.getText().toString().trim();
+
+        String key = databaseReference.push().getKey();
+
+        SingleMeasurement singleMeasurement = new SingleMeasurement(date,time,systolicPressure,diastolicPressure,heartRate,comment);
+
+        databaseReference.child(key).setValue(singleMeasurement);
+        Toast.makeText(getApplicationContext(),"Measurement added",Toast.LENGTH_LONG);
 
     }
 
