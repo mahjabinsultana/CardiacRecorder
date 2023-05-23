@@ -10,7 +10,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         app:cardCornerRadius="30dp"
@@ -27,6 +27,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:text="Add Record"
                 android:textAlignment="center"
                 android:textColor="@color/black"
@@ -40,7 +41,7 @@
                 android:background="@drawable/lavender_border"
                 android:gravity="start|center_vertical"
                 android:hint="Date"
-                android:padding="15dp"
+                android:padding="10dp"
                 android:textColor="@color/lavender"
                 android:textSize="20dp" />
 

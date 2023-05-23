@@ -111,6 +111,18 @@ public class InsertMeasurement extends AppCompatActivity {
         String heartRate = heartRateText.getText().toString().trim();
         String comment = commentText.getText().toString().trim();
 
+        int intSystolicPressure = Integer.parseInt(systolicPressure);
+        int intDiastolicPressure = Integer.parseInt(diastolicPressure);
+        int intHeartRate = Integer.parseInt(heartRate);
+
+        while(intSystolicPressure<=0||intSystolicPressure>200)
+        {
+            Toast.makeText(getApplicationContext(),"Insert between 0 and 200",Toast.LENGTH_LONG);
+            systolicPressure = systolicPressureText.getText().toString().trim();
+            intSystolicPressure = Integer.parseInt(systolicPressure);
+        }
+
+
         String key = databaseReference.push().getKey();
 
         SingleMeasurement singleMeasurement = new SingleMeasurement(date,time,systolicPressure,diastolicPressure,heartRate,comment);
