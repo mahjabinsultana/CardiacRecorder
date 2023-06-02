@@ -176,7 +176,7 @@ public class InsertMeasurement extends AppCompatActivity {
                 toast.show();
             }
         }
-        
+
     }
 
 
