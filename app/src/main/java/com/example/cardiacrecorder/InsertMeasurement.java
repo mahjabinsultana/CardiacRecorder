@@ -7,6 +7,7 @@ import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -105,16 +106,85 @@ public class InsertMeasurement extends AppCompatActivity {
     public void insertData()
     {
         String date = dateView.getText().toString().trim();
+
         String time = timeView.getText().toString().trim();
         String systolicPressure = systolicPressureText.getText().toString().trim();
         String diastolicPressure = diastolicPressureText.getText().toString().trim();
         String heartRate = heartRateText.getText().toString().trim();
         String comment = commentText.getText().toString().trim();
+        int intSystolicPressure = -1,intDiastolicPressure=-1,intHeartRate=-1;
 
-        int intSystolicPressure = Integer.parseInt(systolicPressure);
-        int intDiastolicPressure = Integer.parseInt(diastolicPressure);
-        int intHeartRate = Integer.parseInt(heartRate);
+        if(systolicPressure!=null){
+            intSystolicPressure = Integer.parseInt(systolicPressure);
+        }
+        if(diastolicPressure!=null){
+            intDiastolicPressure = Integer.parseInt(diastolicPressure);
+        }
+        if(heartRate!=null){
+            intHeartRate = Integer.parseInt(heartRate);
+        }
 
+
+
+        // Helping user by ensuring proper data type
+        if(date== null){
+            Toast toast = Toast.makeText(getApplicationContext(),"Click on Date Box",Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
+        else if(time== null){
+            Toast toast = Toast.makeText(getApplicationContext(),"Click on Time Box",Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
+        else if(systolicPressure== null){
+            Toast toast = Toast.makeText(getApplicationContext(),"Click on Systolic Pressure Box",Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
+        else if(diastolicPressure== null){
+            Toast toast = Toast.makeText(getApplicationContext(),"Click on Diastolic Pressure Box",Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
+        else if(heartRate== null){
+            Toast toast = Toast.makeText(getApplicationContext(),"Click on Heart Rate Box",Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
+        else{
+            if(intSystolicPressure<0||intSystolicPressure>200){
+                Toast toast = Toast.makeText(getApplicationContext(),"Enter Systolic Pressure between 0 and 200",Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
+            }
+            else if(intDiastolicPressure<0||intDiastolicPressure>200){
+                Toast toast = Toast.makeText(getApplicationContext(),"Enter Diastolic Pressure between 0 and 200",Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
+            }
+            else if(intHeartRate<0||intHeartRate>200){
+                Toast toast = Toast.makeText(getApplicationContext(),"Enter Heart Rate between 0 and 200",Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
+            }
+            else{
+                String key = databaseReference.push().getKey();
+
+                SingleMeasurement singleMeasurement = new SingleMeasurement(date,time,systolicPressure,diastolicPressure,heartRate,comment);
+
+                databaseReference.child(key).setValue(singleMeasurement);
+                Toast toast = Toast.makeText(getApplicationContext(),"Measurement added",Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
+            }
+        }
+
+
+
+
+
+/*
         while(intSystolicPressure<=0||intSystolicPressure>200)
         {
             Toast.makeText(getApplicationContext(),"Insert between 0 and 200",Toast.LENGTH_LONG);
@@ -122,14 +192,80 @@ public class InsertMeasurement extends AppCompatActivity {
             intSystolicPressure = Integer.parseInt(systolicPressure);
         }
 
+        while(intDiastolicPressure<=0||intDiastolicPressure>200)
+        {
+            Toast.makeText(getApplicationContext(),"Insert between 0 and 200",Toast.LENGTH_LONG);
+            diastolicPressure = diastolicPressureText.getText().toString().trim();
+            intDiastolicPressure = Integer.parseInt(diastolicPressure);
+        }
 
+        while(intHeartRate<=0||intHeartRate>200)
+        {
+            Toast.makeText(getApplicationContext(),"Insert between 0 and 200",Toast.LENGTH_LONG);
+            heartRate = heartRateText.getText().toString().trim();
+            intHeartRate = Integer.parseInt(heartRate);
+        }
+
+        if(intSystolicPressure>0&&intSystolicPressure<200&&intDiastolicPressure>0&&intDiastolicPressure<200&&intHeartRate>0&&intHeartRate<200){
+            String key = databaseReference.push().getKey();
+
+            SingleMeasurement singleMeasurement = new SingleMeasurement(date,time,systolicPressure,diastolicPressure,heartRate,comment);
+
+            databaseReference.child(key).setValue(singleMeasurement);
+            Toast.makeText(getApplicationContext(),"Measurement added",Toast.LENGTH_LONG);
+        }
+        else{
+            Toast.makeText(getApplicationContext(),"Wrong Data Entry",Toast.LENGTH_LONG);
+        }
+ */
+/*
+        // Helping user by ensuring proper data type
+        if(date== null){
+            Toast toast = Toast.makeText(getApplicationContext(),"Click on Date Box",Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
+        else if(time== null){
+            Toast toast = Toast.makeText(getApplicationContext(),"Click on Time Box",Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
+        else if(intSystolicPressure<0||intSystolicPressure>200){
+            Toast toast = Toast.makeText(getApplicationContext(),"Enter Systolic Pressure between 0 and 200",Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
+        else if(intDiastolicPressure<0||intDiastolicPressure>200){
+            Toast toast = Toast.makeText(getApplicationContext(),"Enter Diastolic Pressure between 0 and 200",Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
+        else if(intHeartRate<0||intHeartRate>200){
+            Toast toast = Toast.makeText(getApplicationContext(),"Enter Heart Rate between 0 and 200",Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
+        else{
+            String key = databaseReference.push().getKey();
+
+            SingleMeasurement singleMeasurement = new SingleMeasurement(date,time,systolicPressure,diastolicPressure,heartRate,comment);
+
+            databaseReference.child(key).setValue(singleMeasurement);
+            Toast toast = Toast.makeText(getApplicationContext(),"Measurement added",Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+            toast.show();
+        }
+*/
+        /*
         String key = databaseReference.push().getKey();
 
         SingleMeasurement singleMeasurement = new SingleMeasurement(date,time,systolicPressure,diastolicPressure,heartRate,comment);
 
         databaseReference.child(key).setValue(singleMeasurement);
-        Toast.makeText(getApplicationContext(),"Measurement added",Toast.LENGTH_LONG);
-
+        Toast toast = Toast.makeText(getApplicationContext(),"Measurement added",Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+        toast.show();
+        */
     }
 
 
