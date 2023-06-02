@@ -42,7 +42,7 @@
                 android:gravity="start|center_vertical"
                 android:hint="Date"
                 android:padding="10dp"
-                android:textColor="@color/lavender"
+                android:textColor="@color/black"
                 android:textSize="20dp" />
 
             <TextView
@@ -54,7 +54,7 @@
                 android:gravity="start|center_vertical"
                 android:hint="Time"
                 android:padding="10dp"
-                android:textColor="@color/lavender"
+                android:textColor="@color/black"
                 android:textSize="20dp" />
 
             <EditText
@@ -66,7 +66,7 @@
                 android:gravity="start|center_vertical"
                 android:hint="Systolic Pressure"
                 android:padding="10dp"
-                android:textColor="@color/lavender"
+                android:textColor="@color/black"
                 android:textSize="20dp" />
 
             <EditText
@@ -82,6 +82,7 @@
                 android:textSize="20dp"
                 />
 
+
             <EditText
                 android:id="@+id/heartRateId"
                 android:layout_width="match_parent"
@@ -91,7 +92,7 @@
                 android:gravity="start|center_vertical"
                 android:hint="Heart Rate(In BPM)"
                 android:padding="10dp"
-                android:textColor="@color/lavender"
+                android:textColor="@color/black"
                 android:textSize="20dp" />
 
             <EditText
@@ -103,7 +104,7 @@
                 android:gravity="start|center_vertical"
                 android:hint="Comment"
                 android:padding="10dp"
-                android:textColor="@color/lavender"
+                android:textColor="@color/black"
                 android:textSize="20dp" />
 
             <Button
@@ -115,7 +116,7 @@
                 android:textColor="@color/lavender"
                 android:textSize="20dp"
 
-                />
+                app:rippleColor="#f2e6e6" />
 
         </LinearLayout>
 
