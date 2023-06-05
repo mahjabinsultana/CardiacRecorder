@@ -115,9 +115,6 @@ public class InsertMeasurement extends AppCompatActivity {
         int intSystolicPressure = -1,intDiastolicPressure=-1,intHeartRate=-1;
 
 
-
-
-
         // Helping user by ensuring proper data type
         if(date.matches("")){
             Toast toast = Toast.makeText(getApplicationContext(),"Click on Date Box",Toast.LENGTH_LONG);
@@ -138,7 +135,8 @@ public class InsertMeasurement extends AppCompatActivity {
             Toast toast = Toast.makeText(getApplicationContext(),"Click on Diastolic Pressure Box",Toast.LENGTH_LONG);
             toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
             toast.show();
-        }
+
+       
         else if(heartRate.matches("")){
             Toast toast = Toast.makeText(getApplicationContext(),"Click on Heart Rate Box",Toast.LENGTH_LONG);
             toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
@@ -149,7 +147,7 @@ public class InsertMeasurement extends AppCompatActivity {
             intDiastolicPressure = Integer.parseInt(diastolicPressure);
             intHeartRate = Integer.parseInt(heartRate);
 
-
+       
             if(intSystolicPressure<0||intSystolicPressure>200){
                 Toast toast = Toast.makeText(getApplicationContext(),"Enter Systolic Pressure between 0 and 200",Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
@@ -168,15 +166,12 @@ public class InsertMeasurement extends AppCompatActivity {
             else{
                 String key = databaseReference.push().getKey();
 
-                SingleMeasurement singleMeasurement = new SingleMeasurement(date,time,systolicPressure,diastolicPressure,heartRate,comment);
-
                 databaseReference.child(key).setValue(singleMeasurement);
                 Toast toast = Toast.makeText(getApplicationContext(),"Measurement added",Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
             }
         }
-
     }
 
 
