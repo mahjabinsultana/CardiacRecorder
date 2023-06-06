@@ -131,11 +131,11 @@ public class InsertMeasurement extends AppCompatActivity {
             toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
             toast.show();
         }
-        else if(diastolicPressure.matches("")){
-            Toast toast = Toast.makeText(getApplicationContext(),"Click on Diastolic Pressure Box",Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+        else if(diastolicPressure.matches("")) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Click on Diastolic Pressure Box", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
             toast.show();
-
+        }
        
         else if(heartRate.matches("")){
             Toast toast = Toast.makeText(getApplicationContext(),"Click on Heart Rate Box",Toast.LENGTH_LONG);
@@ -165,7 +165,7 @@ public class InsertMeasurement extends AppCompatActivity {
             }
             else{
                 String key = databaseReference.push().getKey();
-
+                SingleMeasurement singleMeasurement = new SingleMeasurement(date, time, systolicPressure, diastolicPressure, heartRate, comment);
                 databaseReference.child(key).setValue(singleMeasurement);
                 Toast toast = Toast.makeText(getApplicationContext(),"Measurement added",Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
