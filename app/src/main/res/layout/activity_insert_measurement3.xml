@@ -78,9 +78,9 @@
                 android:gravity="start|center_vertical"
                 android:hint="Diastolic Pressure"
                 android:padding="10dp"
-
-                android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textColor="@color/lavender"
+                android:textSize="20dp"
+                />
 
 
             <EditText
