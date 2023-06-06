@@ -131,6 +131,4 @@ public class InsertMeasurement extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),"Measurement added",Toast.LENGTH_LONG);
 
     }
-
-
 }
