@@ -8,15 +8,17 @@ public class SingleMeasurement {
     private String diastolicPressure;
     private String heartRate;
     private String comment;
+    public String key;
 
     // constructor
-    public SingleMeasurement(String date, String time, String systolicPressure, String diastolicPressure, String heartRate, String comment) {
+    public SingleMeasurement(String date, String time, String systolicPressure, String diastolicPressure, String heartRate, String comment,String key) {
         this.date = date;
         this.time = time;
         this.systolicPressure = systolicPressure;
         this.diastolicPressure = diastolicPressure;
         this.heartRate = heartRate;
         this.comment = comment;
+        this.key=key;
     }
 
     // getter and setter
@@ -67,4 +69,12 @@ public class SingleMeasurement {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    public String getKey() {
+        return key;
+    }
+    public void setKey(String key) {
+        this.key = key;
+    }
+
 }
