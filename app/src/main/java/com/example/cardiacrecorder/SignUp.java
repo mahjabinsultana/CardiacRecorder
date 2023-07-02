@@ -111,16 +111,21 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     progressBar.setVisibility(View.GONE);
                     if(task.isSuccessful()){
-                        Toast toast = Toast.makeText(getApplicationContext(),"Register is Successful",Toast.LENGTH_LONG);
+                        Toast toast = Toast.makeText(getApplicationContext(),"Registration successful! Please Login.",Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
                         toast.show();
+                        Intent intent = new Intent(getApplicationContext(),SignIn.class);
+                        startActivity(intent);
+                        finish();
                     }
                     else{
-                        Toast toast = Toast.makeText(getApplicationContext(),"Register is not Successful",Toast.LENGTH_LONG);
+                        Toast toast = Toast.makeText(getApplicationContext(),"Registration failed!",Toast.LENGTH_LONG);
                         toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
                         toast.show();
 
                     }
+                    email.setText("");
+                    password.setText("");
                 }
             });
             progressBar.setVisibility(View.GONE);

@@ -2,6 +2,7 @@ package com.example.cardiacrecorder;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -31,7 +34,9 @@ public class UpdateMeasurement extends AppCompatActivity {
     Button updateButton;
     DatePickerDialog.OnDateSetListener setListener;
     TimePickerDialog timePickerDialog;
-
+    FirebaseUser user;
+    String uid;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,15 +50,17 @@ public class UpdateMeasurement extends AppCompatActivity {
         String heartRate = intent.getExtras().getString("heartRate");
         String comment = intent.getExtras().getString("comment");
         String key = intent.getExtras().getString("key");
-
-        databaseReference = FirebaseDatabase.getInstance().getReference("Records");
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        uid = user.getUid();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Records").child(uid);
         dateView = findViewById(R.id.dateId);
         timeView = findViewById(R.id.timeId);
         systolicPressureText = findViewById(R.id.systolicPressureId);
         diastolicPressureText = findViewById(R.id.diastolicPressureId);
         heartRateText = findViewById(R.id.heartRateId);
         commentText = findViewById(R.id.commentId);
-        updateButton = findViewById(R.id.insertButtonId);
+        updateButton = findViewById(R.id.updateButton);
+
 
         dateView.setText(date);
         timeView.setText(time);

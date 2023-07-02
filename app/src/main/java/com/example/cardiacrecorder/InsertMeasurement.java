@@ -17,6 +17,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -32,7 +34,8 @@ public class InsertMeasurement extends AppCompatActivity {
     Button insertButton;
 
     DatabaseReference databaseReference,dref;
-
+    FirebaseUser user;
+    String uid;
     DatePickerDialog.OnDateSetListener setListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +89,9 @@ public class InsertMeasurement extends AppCompatActivity {
 
         // This portion sends data to firebase
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Records");
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        uid = user.getUid();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Records").child(uid);
         dateView = findViewById(R.id.dateId);
         timeView = findViewById(R.id.timeId);
         systolicPressureText = findViewById(R.id.systolicPressureId);
@@ -176,6 +181,15 @@ public class InsertMeasurement extends AppCompatActivity {
                 */
                insert in = new insert();
                 in.insert(date, time,systolicPressure, diastolicPressure, heartRate, comment,key);
+                Toast toast = Toast.makeText(getApplicationContext(),"Measurement added",Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+                toast.show();
+                dateView.setText("");
+                timeView.setText("");
+                systolicPressureText.setText("");
+                diastolicPressureText.setText("");
+                heartRateText.setText("");
+                commentText.setText("");
             }
         }
     }

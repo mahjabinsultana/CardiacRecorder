@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
     String key;
     Button update;
     DatabaseReference dref;
-
+    FirebaseUser user;
+    String uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +58,9 @@ public class MainActivity extends AppCompatActivity {
 
         listview = (ListView) findViewById(R.id.list_view);
 
-
-        dref = FirebaseDatabase.getInstance().getReference("Records");
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        uid = user.getUid();
+        dref = FirebaseDatabase.getInstance().getReference("Records").child(uid);
 
         dref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -124,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 sm.remove(smd);
                 CustomAdapter adapter=new CustomAdapter(MainActivity.this,sm);
                 listview.setAdapter(adapter);
-                FirebaseDatabase.getInstance().getReference().child("Records").child(key).removeValue();
+                FirebaseDatabase.getInstance().getReference().child("Records").child(uid).child(key).removeValue();
 
                 Toast toast = Toast.makeText(getApplicationContext(),"Deleted Successfully",Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
