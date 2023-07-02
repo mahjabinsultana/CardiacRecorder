@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -21,22 +22,46 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 
-public class InsertMeasurement extends AppCompatActivity {
-
-    TimePickerDialog timePickerDialog;
-    TextView dateView;
-    TextView timeView;
-
-    EditText systolicPressureText,diastolicPressureText,heartRateText,commentText;
-    Button insertButton;
+public class UpdateMeasurement extends AppCompatActivity {
 
     DatabaseReference databaseReference;
-
+    TextView dateView;
+    TextView timeView;
+    EditText systolicPressureText,diastolicPressureText,heartRateText,commentText;
+    Button updateButton;
     DatePickerDialog.OnDateSetListener setListener;
+    TimePickerDialog timePickerDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_insert_measurement3);
+        setContentView(R.layout.activity_update_measurement);
+
+        Intent intent = getIntent();
+        String date = intent.getExtras().getString("date");
+        String time = intent.getExtras().getString("time");
+        String systolicPressure = intent.getExtras().getString("systolicPressure");
+        String diastolicPressure = intent.getExtras().getString("diastolicPressure");
+        String heartRate = intent.getExtras().getString("heartRate");
+        String comment = intent.getExtras().getString("comment");
+        String key = intent.getExtras().getString("key");
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("Records");
+        dateView = findViewById(R.id.dateId);
+        timeView = findViewById(R.id.timeId);
+        systolicPressureText = findViewById(R.id.systolicPressureId);
+        diastolicPressureText = findViewById(R.id.diastolicPressureId);
+        heartRateText = findViewById(R.id.heartRateId);
+        commentText = findViewById(R.id.commentId);
+        updateButton = findViewById(R.id.insertButtonId);
+
+        dateView.setText(date);
+        timeView.setText(time);
+        systolicPressureText.setText(systolicPressure);
+        diastolicPressureText.setText(diastolicPressure);
+        heartRateText.setText(heartRate);
+        commentText.setText(comment);
+
         // This portion gets the date
         dateView = findViewById(R.id.dateId);
         Calendar calendar = Calendar.getInstance();
@@ -47,7 +72,7 @@ public class InsertMeasurement extends AppCompatActivity {
         dateView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(InsertMeasurement.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,setListener,year,month,day);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(UpdateMeasurement.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,setListener,year,month,day);
                 datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 datePickerDialog.show();
             }
@@ -71,7 +96,7 @@ public class InsertMeasurement extends AppCompatActivity {
                 int minute = 12;
                 boolean is24HourView = true;
 
-                timePickerDialog = new TimePickerDialog(InsertMeasurement.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, new TimePickerDialog.OnTimeSetListener() {
+                timePickerDialog = new TimePickerDialog(UpdateMeasurement.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
                         timeView.setText(hourOfDay+" : "+ minute);
@@ -85,25 +110,18 @@ public class InsertMeasurement extends AppCompatActivity {
 
         // This portion sends data to firebase
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Records");
-        dateView = findViewById(R.id.dateId);
-        timeView = findViewById(R.id.timeId);
-        systolicPressureText = findViewById(R.id.systolicPressureId);
-        diastolicPressureText = findViewById(R.id.diastolicPressureId);
-        heartRateText = findViewById(R.id.heartRateId);
-        commentText = findViewById(R.id.commentId);
-        insertButton = findViewById(R.id.insertButtonId);
 
-        insertButton.setOnClickListener(new View.OnClickListener() {
+
+        updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                insertData();
+                updateData(key);
             }
         });
 
     }
 
-    public void insertData()
+    public void updateData(String key)
     {
         String date = dateView.getText().toString().trim();
 
@@ -136,7 +154,7 @@ public class InsertMeasurement extends AppCompatActivity {
             toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
             toast.show();
         }
-       
+
         else if(heartRate.matches("")){
             Toast toast = Toast.makeText(getApplicationContext(),"Click on Heart Rate Box",Toast.LENGTH_LONG);
             toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
@@ -147,7 +165,7 @@ public class InsertMeasurement extends AppCompatActivity {
             intDiastolicPressure = Integer.parseInt(diastolicPressure);
             intHeartRate = Integer.parseInt(heartRate);
 
-       
+
             if(intSystolicPressure<0||intSystolicPressure>200){
                 Toast toast = Toast.makeText(getApplicationContext(),"Enter Systolic Pressure between 0 and 200",Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
@@ -164,16 +182,14 @@ public class InsertMeasurement extends AppCompatActivity {
                 toast.show();
             }
             else{
-                String key = databaseReference.push().getKey();
 
                 SingleMeasurement singleMeasurement = new SingleMeasurement(date, time,
                         systolicPressure, diastolicPressure, heartRate, comment,key);
                 databaseReference.child(key).setValue(singleMeasurement);
-                Toast toast = Toast.makeText(getApplicationContext(),"Measurement added",Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getApplicationContext(),"Measurement updated",Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
             }
         }
     }
-
 }
