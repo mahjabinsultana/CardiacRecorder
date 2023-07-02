@@ -38,8 +38,14 @@ public class MainActivity extends AppCompatActivity {
     Integer indexvalue;
     List<SingleMeasurement> sm;
     SingleMeasurement smd;
+    String date;
+    String time;
+    String systolicPressure;
+    String diastolicPressure;
+    String heartRate;
+    String comment;
     String key;
-
+    Button update;
     DatabaseReference dref;
 
     @Override
@@ -86,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
         add = (Button) findViewById(R.id.add);
         delete = (Button) findViewById(R.id.delete);
+        update = (Button) findViewById(R.id.update);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +109,12 @@ public class MainActivity extends AppCompatActivity {
                 indexvalue=i;
                 smd = sm.get(indexvalue);
                 key=smd.getKey();
+                date = smd.getDate();
+                time = smd.getTime();
+                systolicPressure = smd.getSystolicPressure();
+                diastolicPressure = smd.getDiastolicPressure();
+                heartRate = smd.getHeartRate();
+                comment = smd.getComment();
             }
         });
 
@@ -119,6 +132,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), UpdateMeasurement.class);
+                intent.putExtra("date", date );
+                intent.putExtra("time", time );
+                intent.putExtra("systolicPressure",systolicPressure );
+                intent.putExtra("diastolicPressure", diastolicPressure );
+                intent.putExtra("heartRate", heartRate );
+                intent.putExtra("comment", comment );
+                intent.putExtra("key", key );
+                startActivity(intent);
+            }
+        });
 
     }
 }
