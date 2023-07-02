@@ -108,11 +108,11 @@
                 android:textSize="20dp" />
 
             <Button
-                android:id="@+id/insertButtonId"
+                android:id="@+id/signupRegister"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
-                android:text="UPDATE"
+                android:text="SignUp"
                 android:textColor="@color/lavender"
                 android:textSize="20dp"
 
