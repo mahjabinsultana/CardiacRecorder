@@ -12,17 +12,19 @@
 
     <ListView
         android:id="@+id/list_view"
-        android:layout_width="match_parent"
-        android:layout_height="580dp"
+        android:layout_width="358dp"
+        android:layout_height="518dp"
+        android:background="@drawable/lavender_border"
+        android:listSelector="#f5f5f5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.236"
-        android:background="@drawable/lavender_border"
-        android:listSelector="#f5f5f5"
-        />
+        app:layout_constraintVertical_bias="0.236" >
+
+
+    </ListView>
 
     <Button
         android:id="@+id/add"
@@ -32,10 +34,10 @@
         android:textColor="@color/lavender"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/delete"
-        app:layout_constraintHorizontal_bias="0.173"
+        app:layout_constraintHorizontal_bias="0.148"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976"
+        app:layout_constraintVertical_bias="0.896"
         app:rippleColor="#f2e6e6" />
 
     <Button
@@ -46,11 +48,12 @@
         android:textColor="@color/lavender"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.909"
+        app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976"
+        app:layout_constraintVertical_bias="0.897"
         app:rippleColor="#f2e6e6" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
