@@ -2,6 +2,7 @@ package com.example.cardiacrecorder;
 
 import android.app.Activity;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,7 @@ public class CustomAdapter extends ArrayAdapter {
 
     private Activity c;
     List<SingleMeasurement> sm;
-
+    Integer s, d, h;
 
     public CustomAdapter(Activity c, List<SingleMeasurement> sm) {
         super(c, R.layout.list_view,sm);
@@ -45,11 +46,17 @@ public class CustomAdapter extends ArrayAdapter {
 
         SingleMeasurement singleMeasurement = sm.get(position);
 
+        s = Integer.parseInt(singleMeasurement.getSystolicPressure());
+        d = Integer.parseInt(singleMeasurement.getDiastolicPressure());
+        h = Integer.parseInt(singleMeasurement.getHeartRate());
         dat.setText(singleMeasurement.getDate());
         tim.setText(singleMeasurement.getTime());
         sys.setText(singleMeasurement.getSystolicPressure());
+        if(s<90 || s>140)sys.setTextColor(Color.parseColor("#800000"));
         dia.setText(singleMeasurement.getDiastolicPressure());
+        if(s<60 || s>90)dia.setTextColor(Color.parseColor("#800000"));
         hr.setText(singleMeasurement.getHeartRate());
+        if(h<60 || s>100)hr.setTextColor(Color.parseColor("#800000"));
         com.setText(singleMeasurement.getComment());
 
 
