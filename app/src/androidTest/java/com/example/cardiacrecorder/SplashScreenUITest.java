@@ -31,8 +31,8 @@ import org.junit.runner.RunWith;
 @LargeTest
 public class SplashScreenUITest {
     @Rule
-    public ActivityScenarioRule<SignUp> activityRule =
-            new ActivityScenarioRule<>(SignUp.class);
+    public ActivityScenarioRule<SplashScreen> activityRule =
+            new ActivityScenarioRule<>(SplashScreen.class);
 
     @Test
     public void testSplashScreen()
