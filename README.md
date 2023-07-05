@@ -11,17 +11,23 @@ It is an app to keep track of user's health. With CardiacRecorder, user can conv
 - delete a record at any time.
 - see unusual records highlighted.
 ## Screenshots
-  
+
+### Splash Screen
 <img src="https://github.com/mahjabinsultana/CardiacRecorder/blob/main/images/appSplashScreen.jpg" width="350" height="700" />
 
+### Register Page
 <img src="https://github.com/mahjabinsultana/CardiacRecorder/blob/main/images/appRegister.jpg" width="350" height="700" />
 
+### Login Page
 <img src="https://github.com/mahjabinsultana/CardiacRecorder/blob/main/images/appLogin.jpg" width="350" height="700" />
 
+### Homepage
 <img src="https://github.com/mahjabinsultana/CardiacRecorder/blob/main/images/appHomepage.jpg" width="350" height="700" />
 
+### Insert Measurement Page
 <img src="https://github.com/mahjabinsultana/CardiacRecorder/blob/main/images/appAddRecord.jpg" width="350" height="700"/>
 
+### Update Measurement Page
 <img src="https://github.com/mahjabinsultana/CardiacRecorder/blob/main/images/appUpdateRecord.jpg" width="350" height="700" />
 
 
