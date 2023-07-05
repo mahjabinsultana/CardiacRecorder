@@ -103,13 +103,13 @@ public class MainActivityUITest {
         onView(withText("Measurement updated")).check(matches(isDisplayed()));
     }
 
-    public void testDeleteRecord()
+    /*public void testDeleteRecord()
     {
         onData(anything()).inAdapterView(withId(R.id.list_view)).atPosition(0).perform(click());
         onView(withId(R.id.delete)).perform(click());
         onView(withText("Deleted Successfully")).check(matches(isDisplayed()));
 
-    }
+    }*/
 
 
 }

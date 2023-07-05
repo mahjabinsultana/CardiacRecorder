@@ -179,7 +179,7 @@ public class InsertMeasurement extends AppCompatActivity {
                 toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
                 */
-               insert in = new insert();
+                insert in = new insert();
                 in.insert(date, time,systolicPressure, diastolicPressure, heartRate, comment,key);
                 Toast toast = Toast.makeText(getApplicationContext(),"Measurement added",Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);

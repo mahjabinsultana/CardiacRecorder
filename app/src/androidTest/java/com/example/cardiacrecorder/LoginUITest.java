@@ -42,7 +42,6 @@ public class LoginUITest {
         onView(withId(R.id.emailLogin)).perform(ViewActions.typeText("user@gmail.com"));
         onView(withId(R.id.passwordLogin)).perform(ViewActions.typeText("user"));
         onView(withId(R.id.signinButton)).perform(click());
-        onView(withText("Login successful!")).check(matches(isDisplayed()));
-
+        onView(withId(R.id.mainactivity)).check(matches(isDisplayed()));
     }
 }
