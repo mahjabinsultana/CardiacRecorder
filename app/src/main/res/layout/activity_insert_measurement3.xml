@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".InsertMeasurement"
-    android:id="@+id/insermeasurement">
+    android:id="@+id/insertmeasurement">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
