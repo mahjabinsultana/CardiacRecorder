@@ -172,15 +172,9 @@ public class InsertMeasurement extends AppCompatActivity {
             else{
                 String key = databaseReference.push().getKey();
 
-                /*SingleMeasurement singleMeasurement = new SingleMeasurement(date, time,
+                SingleMeasurement singleMeasurement = new SingleMeasurement(date, time,
                         systolicPressure, diastolicPressure, heartRate, comment,key);
                 databaseReference.child(key).setValue(singleMeasurement);
-                Toast toast = Toast.makeText(getApplicationContext(),"Measurement added",Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
-                toast.show();
-                */
-                insert in = new insert();
-                in.insert(date, time,systolicPressure, diastolicPressure, heartRate, comment,key);
                 Toast toast = Toast.makeText(getApplicationContext(),"Measurement added",Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
                 toast.show();
@@ -194,7 +188,7 @@ public class InsertMeasurement extends AppCompatActivity {
         }
     }
 
-/*
+
     public void insert(String date, String time, String systolicPressure, String diastolicPressure,
                        String heartRate, String comment,String key)
     {
@@ -206,7 +200,7 @@ public class InsertMeasurement extends AppCompatActivity {
         toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
         toast.show();
     }
-    */
+
 
 
 }

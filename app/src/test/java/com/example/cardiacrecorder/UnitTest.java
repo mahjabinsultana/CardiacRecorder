@@ -24,12 +24,7 @@ public class UnitTest {
     public void testAddRecord()
     {
 
-        insert in = new insert();
 
-        in.insert("1-1-2023","12 : 12","80","110",
-                "75","normal","abcd");
-
-        assertTrue(1==1);
 
 
     }

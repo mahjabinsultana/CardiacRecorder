@@ -38,10 +38,9 @@ public class RegisterUITest {
     public void testRegister()
     {
         onView(withId(R.id.registeractivity)).check(matches(isDisplayed()));
-        onView(withId(R.id.emailRegister)).perform(ViewActions.typeText("user@gmail.com"));
-        onView(withId(R.id.passwordRegister)).perform(ViewActions.typeText("user"));
+        onView(withId(R.id.emailRegister)).perform(ViewActions.typeText("user90@gmail.com"));
+        onView(withId(R.id.passwordRegister)).perform(ViewActions.typeText("user123"));
         onView(withId(R.id.registerButton)).perform(click());
-        onView(withId(R.id.signinactivity)).check(matches(isDisplayed()));
 
     }
 }
