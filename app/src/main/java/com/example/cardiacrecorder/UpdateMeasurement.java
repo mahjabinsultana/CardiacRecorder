@@ -59,7 +59,7 @@ public class UpdateMeasurement extends AppCompatActivity {
         diastolicPressureText = findViewById(R.id.diastolicPressureId);
         heartRateText = findViewById(R.id.heartRateId);
         commentText = findViewById(R.id.commentId);
-        updateButton = findViewById(R.id.updateButton);
+        updateButton = findViewById(R.id.updateButtonId);
 
 
         dateView.setText(date);

@@ -39,8 +39,8 @@ public class LoginUITest {
     public void testLogin()
     {
         onView(withId(R.id.signinactivity)).check(matches(isDisplayed()));
-        onView(withId(R.id.emailLogin)).perform(ViewActions.typeText("user@gmail.com"));
-        onView(withId(R.id.passwordLogin)).perform(ViewActions.typeText("user"));
+        onView(withId(R.id.emailLogin)).perform(ViewActions.typeText("user100@gmail.com"));
+        onView(withId(R.id.passwordLogin)).perform(ViewActions.typeText("user123"));
         onView(withId(R.id.signinButton)).perform(click());
     }
 }
